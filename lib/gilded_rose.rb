@@ -11,23 +11,23 @@ class GildedRose
 
   def increase_quality(item, amount)
     # amount *= 2 if item.sell_in < 0
-    item.quality += amount
+    item.quality += amount unless item.name == 'Sulfuras, Hand of Ragnaros'
     item.quality = 50 if item.quality > 50
   end
 
   def decrease_quality(item, amount)
     # amount *= 2 if item.sell_in < 0
-    item.quality -= amount
+    item.quality -= amount unless item.name == 'Sulfuras, Hand of Ragnaros'
     item.quality = 0 if item.quality < 0
   end
 
   def decrease_sellin(item, amount)
-    item.sell_in -= amount
+    item.sell_in -= amount unless item.name == 'Sulfuras, Hand of Ragnaros'
   end
 
   def update_quality(item)
     if (item.name != 'Aged Brie') && (item.name != 'Backstage passes to a TAFKAL80ETC concert')
-      decrease_quality(item, 1) if item.name != 'Sulfuras, Hand of Ragnaros'
+      decrease_quality(item, 1)
     else
       increase_quality(item, 1)
       if item.name == 'Backstage passes to a TAFKAL80ETC concert'
@@ -35,15 +35,11 @@ class GildedRose
         increase_quality(item, 1) if item.sell_in < 6
       end
     end
-    decrease_sellin(item, 1) if item.name != 'Sulfuras, Hand of Ragnaros'
+    decrease_sellin(item, 1)
     if item.sell_in < 0
       if item.name != 'Aged Brie'
         if item.name != 'Backstage passes to a TAFKAL80ETC concert'
-          if item.quality > 0
-            if item.name != 'Sulfuras, Hand of Ragnaros'
-              decrease_quality(item, 1)
-            end
-          end
+          decrease_quality(item, 1) if item.quality > 0
         else
           item.quality = item.quality - item.quality
         end
