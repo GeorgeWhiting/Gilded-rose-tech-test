@@ -79,29 +79,29 @@ describe GildedRose do
     end
 
     context 'Conjured' do
-      # it "Conjured item quality decreases by 2 each day" do
-      #   items = [Item.new("Conjured Mana Strudel", 10, 10)]
-      #   GildedRose.new(items).next_day
-      #   expect(items[0].quality).to eq 8
-      # end
-      #
-      # it "Conjured item quality decreases by 4 each day after sell by date passes" do
-      #   items = [Item.new("Conjured Mana Strudel", 0, 10)]
-      #   GildedRose.new(items).next_day
-      #   expect(items[0].quality).to eq 6
-      # end
-      #
-      # it 'Item quality can never be negative' do
-      #   items = [Item.new('Conjured Mana Strudel', 10, 0)]
-      #   GildedRose.new(items).next_day
-      #   expect(items[0].quality).to eq 0
-      # end
-      #
-      # it 'sell_in value decreases by one each day' do
-      #   items = [Item.new('Conjured Mana Strudel', 0, 10)]
-      #   GildedRose.new(items).next_day
-      #   expect(items[0].sell_in).to eq -1
-      # end
+      it "Conjured item quality decreases by 2 each day" do
+        items = [Item.new("Conjured Mana Strudel", 10, 10)]
+        GildedRose.new(items).next_day
+        expect(items[0].quality).to eq 8
+      end
+
+      it "Conjured item quality decreases by 4 each day after sell by date passes" do
+        items = [Item.new("Conjured Mana Strudel", 0, 10)]
+        GildedRose.new(items).next_day
+        expect(items[0].quality).to eq 6
+      end
+
+      it 'Item quality can never be negative' do
+        items = [Item.new('Conjured Mana Strudel', 10, 0)]
+        GildedRose.new(items).next_day
+        expect(items[0].quality).to eq 0
+      end
+
+      it 'sell_in value decreases by one each day' do
+        items = [Item.new('Conjured Mana Strudel', 0, 10)]
+        GildedRose.new(items).next_day
+        expect(items[0].sell_in).to eq -1
+      end
     end
 
     context 'Normal item' do
