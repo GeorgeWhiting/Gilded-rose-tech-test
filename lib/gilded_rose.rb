@@ -1,5 +1,4 @@
 class GildedRose
-
   def initialize(items)
     @items = items
   end
@@ -11,11 +10,15 @@ class GildedRose
   end
 
   def increase_quality(item, amount)
+    # amount *= 2 if item.sell_in < 0
     item.quality += amount
+    item.quality = 50 if item.quality > 50
   end
 
   def decrease_quality(item, amount)
+    # amount *= 2 if item.sell_in < 0
     item.quality -= amount
+    item.quality = 0 if item.quality < 0
   end
 
   def decrease_sellin(item, amount)
@@ -23,37 +26,21 @@ class GildedRose
   end
 
   def update_quality(item)
-    if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-      if item.quality > 0
-        if item.name != "Sulfuras, Hand of Ragnaros"
-          decrease_quality(item, 1)
-        end
-      end
+    if (item.name != 'Aged Brie') && (item.name != 'Backstage passes to a TAFKAL80ETC concert')
+      decrease_quality(item, 1) if item.name != 'Sulfuras, Hand of Ragnaros'
     else
-      if item.quality < 50
-        increase_quality(item, 1)
-        if item.name == "Backstage passes to a TAFKAL80ETC concert"
-          if item.sell_in < 11
-            if item.quality < 50
-              increase_quality(item, 1)
-            end
-          end
-          if item.sell_in < 6
-            if item.quality < 50
-              increase_quality(item, 1)
-            end
-          end
-        end
+      increase_quality(item, 1)
+      if item.name == 'Backstage passes to a TAFKAL80ETC concert'
+        increase_quality(item, 1) if item.sell_in < 11
+        increase_quality(item, 1) if item.sell_in < 6
       end
     end
-    if item.name != "Sulfuras, Hand of Ragnaros"
-      decrease_sellin(item, 1)
-    end
+    decrease_sellin(item, 1) if item.name != 'Sulfuras, Hand of Ragnaros'
     if item.sell_in < 0
-      if item.name != "Aged Brie"
-        if item.name != "Backstage passes to a TAFKAL80ETC concert"
+      if item.name != 'Aged Brie'
+        if item.name != 'Backstage passes to a TAFKAL80ETC concert'
           if item.quality > 0
-            if item.name != "Sulfuras, Hand of Ragnaros"
+            if item.name != 'Sulfuras, Hand of Ragnaros'
               decrease_quality(item, 1)
             end
           end
@@ -61,9 +48,7 @@ class GildedRose
           item.quality = item.quality - item.quality
         end
       else
-        if item.quality < 50
-          increase_quality(item, 1)
-        end
+        increase_quality(item, 1)
       end
     end
   end
@@ -78,7 +63,7 @@ class Item
     @quality = quality
   end
 
-  def to_s()
+  def to_s
     "#{@name}, #{@sell_in}, #{@quality}"
   end
 end

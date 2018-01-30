@@ -4,7 +4,6 @@ describe GildedRose do
       items = [Item.new("Sulfuras, Hand of Ragnaros", 10, 80)]
       GildedRose.new(items).next_day
       expect(items[0].quality).to eq 80
-      expect(items[0].sell_in).to eq 10
     end
 
     it "sellIn of sulfuras never changes" do
