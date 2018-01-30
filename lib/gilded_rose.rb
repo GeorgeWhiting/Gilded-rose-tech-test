@@ -18,6 +18,10 @@ class GildedRose
     item.quality -= amount
   end
 
+  def decrease_sellin(item, amount)
+    item.sell_in -= amount
+  end
+
   def update_quality(item)
     if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
       if item.quality > 0
@@ -43,7 +47,7 @@ class GildedRose
       end
     end
     if item.name != "Sulfuras, Hand of Ragnaros"
-      item.sell_in = item.sell_in - 1
+      decrease_sellin(item, 1)
     end
     if item.sell_in < 0
       if item.name != "Aged Brie"
