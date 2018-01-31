@@ -1,4 +1,7 @@
 require_relative 'normal'
+require_relative 'brie'
+require_relative 'pass'
+require_relative 'sulfuras'
 class GildedRose
   def initialize(items)
     @items = items
@@ -10,37 +13,17 @@ class GildedRose
     end
   end
 
-
-
-  def update_brie(item)
-    item.sell_in -= 1
-    return if item.quality >= 50
-    item.quality += 1
-    item.quality += 1 if item.sell_in < 0
-  end
-
-  def update_pass(item)
-    item.sell_in -= 1
-    return item.quality = 0 if item.sell_in < 0
-    return if item.quality >= 50
-    item.quality += 1
-    item.quality += 1 if item.sell_in < 11
-    item.quality += 1 if item.sell_in < 6
-  end
-
-  def update_sulfuras(item); end
-
   def update_quality(item)
     case item.name
 
     when 'Aged Brie'
-      update_brie(item)
+      Brie.new(item).update
 
     when 'Backstage passes to a TAFKAL80ETC concert'
-      update_pass(item)
+      Pass.new(item).update
 
     when 'Sulfuras, Hand of Ragnaros'
-      update_sulfuras(item)
+      Sulfuras.new(item).update
 
     else
       Normal.new(item).update
