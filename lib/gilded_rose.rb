@@ -5,6 +5,15 @@ require_relative 'sulfuras'
 require_relative 'conjured'
 
 class GildedRose
+
+  SPECIAL_CASES = {
+    'Aged Brie' => Brie,
+    'Backstage passes to a TAFKAL80ETC concert' => Pass,
+    'Sulfuras, Hand of Ragnaros' => Sulfuras,
+    'Conjured Mana Strudel' => Conjured
+  }
+  DEFAULT_CASE = Normal
+
   def initialize(items)
     @items = items
   end
@@ -15,23 +24,8 @@ class GildedRose
     end
   end
 
-  def get_item_type(item)
-    case item.name
-    when 'Aged Brie'
-      Brie
-    when 'Backstage passes to a TAFKAL80ETC concert'
-      Pass
-    when 'Sulfuras, Hand of Ragnaros'
-      Sulfuras
-    when 'Conjured Mana Strudel'
-      Conjured
-    else
-      Normal
-    end
-  end
-
   def update_quality(item)
-    get_item_type(item).new(item).update
+    (SPECIAL_CASES[item.name] || DEFAULT_CASE).new(item).update
   end
 end
 
