@@ -1,3 +1,4 @@
+require_relative 'normal'
 class GildedRose
   def initialize(items)
     @items = items
@@ -9,12 +10,7 @@ class GildedRose
     end
   end
 
-  def update_normal_item(item)
-    item.sell_in -= 1
-    return if item.quality <= 0
-    item.quality -= 1
-    item.quality -= 1 if item.sell_in < 0
-  end
+
 
   def update_brie(item)
     item.sell_in -= 1
@@ -37,9 +33,6 @@ class GildedRose
   def update_quality(item)
     case item.name
 
-    when 'Glyph of Thorns'
-      update_normal_item(item)
-
     when 'Aged Brie'
       update_brie(item)
 
@@ -48,6 +41,9 @@ class GildedRose
 
     when 'Sulfuras, Hand of Ragnaros'
       update_sulfuras(item)
+
+    else
+      Normal.new(item).update
     end
   end
 end

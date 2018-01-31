@@ -1,4 +1,5 @@
 require './lib/gilded_rose'
+require './lib/normal'
 
 puts "OMGHAI!"
 items = [
