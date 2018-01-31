@@ -10,7 +10,7 @@ class GildedRose
     'Aged Brie' => Brie,
     'Backstage passes to a TAFKAL80ETC concert' => Pass,
     'Sulfuras, Hand of Ragnaros' => Sulfuras,
-    'Conjured Mana Strudel' => Conjured
+    'Conjured' => Conjured
   }
   DEFAULT_CASE = Normal
 
@@ -24,8 +24,12 @@ class GildedRose
     end
   end
 
+  def is_conjured_checker(item)
+    item.name.include?("Conjured") ? "Conjured" : item.name
+  end
+
   def update_quality(item)
-    (SPECIAL_CASES[item.name] || DEFAULT_CASE).new(item).update
+    (SPECIAL_CASES[is_conjured_checker(item)] || DEFAULT_CASE).new(item).update
   end
 end
 

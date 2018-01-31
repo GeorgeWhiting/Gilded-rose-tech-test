@@ -80,7 +80,7 @@ describe GildedRose do
 
     context 'Conjured' do
       it "Conjured item quality decreases by 2 each day" do
-        items = [Item.new("Conjured Mana Strudel", 10, 10)]
+        items = [Item.new("Conjured Mana Biscuit", 10, 10)]
         GildedRose.new(items).next_day
         expect(items[0].quality).to eq 8
       end
