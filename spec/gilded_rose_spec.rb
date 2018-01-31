@@ -66,7 +66,7 @@ describe GildedRose do
       end
 
       it 'cannot have a quality greater than 50' do
-        items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 10, 50)]
+        items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 2, 49)]
         GildedRose.new(items).next_day
         expect(items[0].quality).to eq 50
       end
@@ -78,31 +78,31 @@ describe GildedRose do
       end
     end
 
-    # context 'Conjured' do
-    #   it "Conjured item quality decreases by 2 each day" do
-    #     items = [Item.new("Conjured Mana Strudel", 10, 10)]
-    #     GildedRose.new(items).next_day
-    #     expect(items[0].quality).to eq 8
-    #   end
-    #
-    #   it "Conjured item quality decreases by 4 each day after sell by date passes" do
-    #     items = [Item.new("Conjured Mana Strudel", 0, 10)]
-    #     GildedRose.new(items).next_day
-    #     expect(items[0].quality).to eq 6
-    #   end
-    #
-    #   it 'Item quality can never be negative' do
-    #     items = [Item.new('Conjured Mana Strudel', 10, 0)]
-    #     GildedRose.new(items).next_day
-    #     expect(items[0].quality).to eq 0
-    #   end
-    #
-    #   it 'sell_in value decreases by one each day' do
-    #     items = [Item.new('Conjured Mana Strudel', 0, 10)]
-    #     GildedRose.new(items).next_day
-    #     expect(items[0].sell_in).to eq -1
-    #   end
-    # end
+    context 'Conjured' do
+      it "Conjured item quality decreases by 2 each day" do
+        items = [Item.new("Conjured Mana Strudel", 10, 10)]
+        GildedRose.new(items).next_day
+        expect(items[0].quality).to eq 8
+      end
+
+      it "Conjured item quality decreases by 4 each day after sell by date passes" do
+        items = [Item.new("Conjured Mana Strudel", 0, 10)]
+        GildedRose.new(items).next_day
+        expect(items[0].quality).to eq 6
+      end
+
+      it 'Item quality can never be negative' do
+        items = [Item.new('Conjured Mana Strudel', 10, 0)]
+        GildedRose.new(items).next_day
+        expect(items[0].quality).to eq 0
+      end
+
+      it 'sell_in value decreases by one each day' do
+        items = [Item.new('Conjured Mana Strudel', 0, 10)]
+        GildedRose.new(items).next_day
+        expect(items[0].sell_in).to eq -1
+      end
+    end
 
     context 'Normal item' do
       it 'has its quality decreased each day' do

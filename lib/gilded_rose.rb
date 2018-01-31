@@ -2,6 +2,8 @@ require_relative 'normal'
 require_relative 'brie'
 require_relative 'pass'
 require_relative 'sulfuras'
+require_relative 'conjured'
+
 class GildedRose
   def initialize(items)
     @items = items
@@ -13,21 +15,23 @@ class GildedRose
     end
   end
 
-  def update_quality(item)
+  def get_item_type(item)
     case item.name
-
     when 'Aged Brie'
-      Brie.new(item).update
-
+      Brie
     when 'Backstage passes to a TAFKAL80ETC concert'
-      Pass.new(item).update
-
+      Pass
     when 'Sulfuras, Hand of Ragnaros'
-      Sulfuras.new(item).update
-
+      Sulfuras
+    when 'Conjured Mana Strudel'
+      Conjured
     else
-      Normal.new(item).update
+      Normal
     end
+  end
+
+  def update_quality(item)
+    get_item_type(item).new(item).update
   end
 end
 
