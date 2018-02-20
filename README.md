@@ -1,5 +1,8 @@
 # Gilded Rose Tech Test
 
+Makers Academy week 10
+Time allowed: 13 hours
+
 #### List of rules:
 
 - Each item has a sell_in value and a quality
@@ -8,7 +11,7 @@
 - Item quality can never go below 0
 - Item quality can never go above 50
 
-###### Special item specific rules
+##### Special item specific rules
 
 - Aged Brie gains quality at the same rate normal items lose Quality
  - Quality increases by 1 per day before sell by date
@@ -23,7 +26,7 @@
 
 
 
-#### Working feature test output:
+#### Working feature test output: (pre addition of conjured item rules)
 ```
 -------- day 0 --------
 name, sellIn, quality
